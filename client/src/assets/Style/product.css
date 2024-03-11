@@ -1,0 +1,22 @@
+.product-container {
+    background: red;
+}
+
+.product-box {
+    background-color: yellow;
+    height: 100vh;
+}
+
+.image-box {
+    width: 100%;
+}
+
+.image-cart {
+    width: 100%;
+    background-color: blueviolet;
+}
+
+.product-img {
+    width: fit-content;
+    height: 100vh;
+}

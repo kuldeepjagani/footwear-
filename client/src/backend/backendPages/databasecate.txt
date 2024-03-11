@@ -56,3 +56,70 @@ app.delete('/api/categories/:id', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+
+
+
+////////
+
+
+ <div className="border p-4">
+                            <div className="flex justify-between items-center mb-2">
+                                <span>Sandals</span>
+                                <span>$30</span>
+                            </div>
+                            <button
+                                className="w-full bg-green-500 text-white px-2 py-1 rounded"
+                                onClick={() => addToCart({ name: 'Sandals', price: 30 })}
+                            >
+                                Add to Cart
+                            </button>
+                        </div>
+                        <div className="border p-4">
+                            <div className="flex justify-between items-center mb-2">
+                                <span>Sandals</span>
+                                <span>$30</span>
+                            </div>
+                            <button
+                                className="w-full bg-green-500 text-white px-2 py-1 rounded"
+                                onClick={() => addToCart({ name: 'Sandals', price: 30 })}
+                            >
+                                Add to Cart
+                            </button>
+                        </div>
+                        <div className="border p-4">
+                            <div className="flex justify-between items-center mb-2">
+                                <span>Sandals</span>
+                                <span>$30</span>
+                            </div>
+                            <button
+                                className="w-full bg-green-500 text-white px-2 py-1 rounded"
+                                onClick={() => addToCart({ name: 'Sandals', price: 30 })}
+                            >
+                                Add to Cart
+                            </button>
+                        </div>
+                        <div className="border p-4">
+                            <div className="flex justify-between items-center mb-2">
+                                <span>Sandals</span>
+                                <span>$30</span>
+                            </div>
+                            <button
+                                className="w-full bg-green-500 text-white px-2 py-1 rounded"
+                                onClick={() => addToCart({ name: 'Sandals', price: 30 })}
+                            >
+                                Add to Cart
+                            </button>
+                        </div>
+                        <div className="border p-4">
+                            <div className="flex justify-between items-center mb-2">
+                                <span>Sandals</span>
+                                <span>$30</span>
+                            </div>
+                            <button
+                                className="w-full bg-green-500 text-white px-2 py-1 rounded"
+                                onClick={() => addToCart({ name: 'Sandals', price: 30 })}
+                            >
+                                Add to Cart
+                            </button>
+                        </div>

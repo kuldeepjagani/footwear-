@@ -1,5 +1,6 @@
 const Category = require('../models/categoty')
 const Product = require('../models/product')
+const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
 
 const GetcategoriesController = async (req, res) => {
     try {
@@ -37,22 +38,6 @@ const DeletecategoriesController = async (req, res) => {
 }
 
 
-// const addProductController = async (req, res) => {
-//     // console.log(req.body)
-//     try {
-//         const { name, category, description, price, quantity } = req.body;
-//         console.log(req.body)
-//         console.log(req.file)
-//         const image = req.file.path; // Assuming multer has stored the file path in req.file.path
-
-//         const product = new Product({ name, category, description, price, quantity, image });
-//         await product.save();
-
-//         res.status(201).json({ success: true, product });
-//     } catch (error) {
-//         res.status(500).json({ success: false, error: error.message });
-//     }
-// }
 
 
 module.exports = { GetcategoriesController, AddcategoriesController, EditcategoriesController, DeletecategoriesController }

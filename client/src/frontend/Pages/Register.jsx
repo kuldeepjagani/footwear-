@@ -1,11 +1,8 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-    signInStart,
-    signInSuccess,
-    signInFailure,
-} from '../../redux/user/userSlice';
+import { useDispatch, } from 'react-redux';
+
+import { message } from "antd";
 
 const Register = () => {
 
@@ -14,9 +11,8 @@ const Register = () => {
         email: '',
         password: '',
     });
-    // const navigate = useNavigate()
-    // const { loading, error } = useSelector((state) => state.user);
-    const dispatch = useDispatch();
+    const navigate = useNavigate()
+
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -25,7 +21,6 @@ const Register = () => {
 
     const handelFormData = async (e) => {
         e.preventDefault();
-        console.log(formData)
         try {
 
             const response = await fetch("http://127.0.0.1:3000/api/user/register", {
@@ -34,9 +29,11 @@ const Register = () => {
                 body: JSON.stringify(formData),
             });
             const data = await response.json();
-            console.log(data);
+            navigate('/login')
+            message.success("Register Successfully");
         } catch (error) {
             console.error('Error:', error);
+            message.error("Something Wrong");
         }
     }
 
@@ -46,21 +43,16 @@ const Register = () => {
                 <h1 className='text-3xl text-center font-semibold my-7'>Register</h1>
                 <form onSubmit={handelFormData} className='flex flex-col gap-4'>
 
-                    <input className='border p-3 rounded-lg' type="text" placeholder='username' name="username" value={formData.username} onChange={handleChange} />
-                    <input className='border p-3 rounded-lg' type="email" placeholder='email' name="email" value={formData.email} onChange={handleChange} />
-                    <input className='border p-3 rounded-lg' type="password" placeholder='password' name="password" value={formData.password} onChange={handleChange} />
-
-                    {/* <input
-                        type='password'
-                        placeholder='confirm password'
-                        className='border p-3 rounded-lg'
-                        id='c_password'
-                        onChange={handleChange}
-                    /> */}
-
+                    <input className='border p-3 rounded-lg' type="text" placeholder='username' name="username" value={formData.username} onChange={handleChange} required />
+                    <input className='border p-3 rounded-lg' type="email" placeholder='email' name="email" value={formData.email} onChange={handleChange} required />
+                    <input className='border p-3 rounded-lg' type="password" placeholder='password' name="password" value={formData.password} onChange={handleChange} required />
 
                     <button className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'> Sigunp
                     </button>
+
+                    <div>
+                        <span>Already Register Click on <span className="bg-slate-700 text-white  p-1 rounded-lg uppercase hover:opacity-95 disabled:opacity-80"> <Link to="/login" >Login</Link></span> </span>
+                    </div>
 
                 </form>
 

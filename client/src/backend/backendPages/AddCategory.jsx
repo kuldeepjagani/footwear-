@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import AdminNavbar from '../backendComponent/AdminNavbar'
+import { message } from "antd";
 
 import Footer from '../../frontend/Component/Footer';
 
@@ -34,8 +35,10 @@ const AddCategory = () => {
             const data = await response.json();
             setCategories([...categories, data]);
             setNewCategoryName('');
+            message.success("Category add Successfully")
         } catch (error) {
             console.error('Error adding category:', error);
+            message.error("Error adding category:")
         }
     };
 
@@ -55,9 +58,11 @@ const AddCategory = () => {
                     category._id === categoryId ? { ...category, name: newName } : category
                 );
                 setCategories(updatedCategories);
+                message.success("Category Edit Successfully");
             }
         } catch (error) {
             console.error('Error editing category:', error);
+            message.error("Error editing category:");
         }
     };
 
@@ -70,9 +75,11 @@ const AddCategory = () => {
             if (response.ok) {
                 const filteredCategories = categories.filter(category => category._id !== categoryId);
                 setCategories(filteredCategories);
+                message.success("Category Delete Successfully");
             }
         } catch (error) {
             console.log('Error deleting category:', error);
+            message.error("Error deleting category:");
         }
     };
 

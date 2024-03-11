@@ -1,23 +1,17 @@
 import { useState, useEffect } from "react"
-import React from 'react'
 import AdminNavbar from "../backendComponent/AdminNavbar";
 
-const AddProduct = () => {
 
+
+const AddProduct = () => {
+    const [image, setImage] = useState()
     const [product, setProduct] = useState({
         category: '',
         name: '',
         description: '',
-        image: '',
         price: '',
         quantity: ''
     });
-
-
-
-    const handleImageChange = (e) => {
-        setImage(e.target.files[0]);
-    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -27,18 +21,24 @@ const AddProduct = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const formData = new FormData();
+        formData.append('category', product.category);
+        formData.append('name', product.name);
+        formData.append('description', product.description);
+        formData.append('price', product.price);
+        formData.append('quantity', product.quantity);
+        formData.append('image', image);
+
         try {
-            const response = await fetch('http://127.0.0.1:3000/api/admin/addproduct', {
+            const response = await fetch('http://127.0.0.1:3000/api/product/addproduct', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(product),
+                body: formData,
             });
+            console.log("data")
             const data = await response.json();
             console.log(data)
         } catch (error) {
-            console.error('Error adding category:', error);
+            console.log('Error adding category:', error);
         }
     };
 
@@ -57,9 +57,10 @@ const AddProduct = () => {
             const data = await response.json();
             setCategories(data);
         } catch (error) {
-            console.error('Error fetching categories:', error);
+            console.log('Error fetching categories:', error);
         }
     };
+
     return (
 
         <div>
@@ -67,6 +68,7 @@ const AddProduct = () => {
             <div className="container mx-auto mt-8">
                 <h1 className="text-2xl font-semibold mb-4 text-center my-4">Add Footwear Product</h1>
                 <h1 className="text-2xl font-semibold mb-4">Add Product</h1>
+
                 <form onSubmit={handleSubmit} encType="multipart/form-data">
                     <div className="grid grid-cols-2 gap-4">
                         <div>
@@ -75,7 +77,7 @@ const AddProduct = () => {
                                 <select name="category" value={product.category} onChange={handleChange} className='my-3 w-full p-2 border rounded'>
                                     <option value="">Select category</option>
                                     {categories.map(category => (
-                                        <option key={category._id} value={category._id} name=''>{category.name}</option>
+                                        <option key={category._id} value={category.name} name='category'>{category.name}</option>
                                     ))}
                                 </select>
                             </label>
@@ -89,9 +91,9 @@ const AddProduct = () => {
                             <textarea id="description" name="description" value={product.description} onChange={handleChange} className="w-full p-2 border rounded"></textarea>
                         </div>
                         <div>
-                            <label htmlFor="image" className="block mb-2" onChange={handleImageChange}>Product Image</label>
+                            <label htmlFor="image" className="block mb-2">Product Image</label>
                             {/* <input type="text" id="image" name="image" value={product.image} onChange={handleChange} className="w-full p-2 border rounded" /> */}
-                            <input name="image" type="file" accept="image/*" className="mt-2" />
+                            <input name="image" type="file" onChange={e => setImage(e.target.files[0])} accept="image/*" className="mt-2" />
                         </div>
                         <div>
                             <label htmlFor="price" className="block mb-2">Price</label>
